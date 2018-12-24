@@ -7,21 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E57DF6B20B72A6F79379780 /* Pods_ConfessionsDynamicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887A229A6B5DBB6A236129BA /* Pods_ConfessionsDynamicApp.framework */; };
 		D4EA5A9A21D135C5007D883C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5A9921D135C5007D883C /* AppDelegate.swift */; };
 		D4EA5A9C21D135C5007D883C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5A9B21D135C5007D883C /* ViewController.swift */; };
-		D4EA5A9F21D135C5007D883C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4EA5A9D21D135C5007D883C /* Main.storyboard */; };
 		D4EA5AA121D135CB007D883C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EA5AA021D135CB007D883C /* Assets.xcassets */; };
 		D4EA5AA421D135CB007D883C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4EA5AA221D135CB007D883C /* LaunchScreen.storyboard */; };
+		D4EA5AAC21D136E4007D883C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AAB21D136E4007D883C /* SignUpViewController.swift */; };
+		D4EA5AAE21D13710007D883C /* PostsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AAD21D13710007D883C /* PostsNavigationViewController.swift */; };
+		D4EA5AB021D13884007D883C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AAF21D13884007D883C /* NetworkManager.swift */; };
+		D4EA5AB221D13928007D883C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB121D13928007D883C /* Post.swift */; };
+		D4EA5AB421D14006007D883C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB321D14006007D883C /* PostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33097C385FEBDA6A31CCBF82 /* Pods-ConfessionsDynamicApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfessionsDynamicApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp.debug.xcconfig"; sourceTree = "<group>"; };
+		849ECA7A33D90DFF2878EB00 /* Pods-ConfessionsDynamicApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfessionsDynamicApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp.release.xcconfig"; sourceTree = "<group>"; };
+		887A229A6B5DBB6A236129BA /* Pods_ConfessionsDynamicApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfessionsDynamicApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4EA5A9621D135C5007D883C /* ConfessionsDynamicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfessionsDynamicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4EA5A9921D135C5007D883C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4EA5A9B21D135C5007D883C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D4EA5A9E21D135C5007D883C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4EA5AA021D135CB007D883C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4EA5AA321D135CB007D883C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4EA5AA521D135CB007D883C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4EA5AAB21D136E4007D883C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D4EA5AAD21D13710007D883C /* PostsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsNavigationViewController.swift; sourceTree = "<group>"; };
+		D4EA5AAF21D13884007D883C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D4EA5AB121D13928007D883C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		D4EA5AB321D14006007D883C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E57DF6B20B72A6F79379780 /* Pods_ConfessionsDynamicApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D561F13BB304D710A83CAD8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				33097C385FEBDA6A31CCBF82 /* Pods-ConfessionsDynamicApp.debug.xcconfig */,
+				849ECA7A33D90DFF2878EB00 /* Pods-ConfessionsDynamicApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D4EA5A8D21D135C5007D883C = {
 			isa = PBXGroup;
 			children = (
 				D4EA5A9821D135C5007D883C /* ConfessionsDynamicApp */,
 				D4EA5A9721D135C5007D883C /* Products */,
+				7D561F13BB304D710A83CAD8 /* Pods */,
+				E8A3B098E8D6A84F4B78019D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +80,24 @@
 			children = (
 				D4EA5A9921D135C5007D883C /* AppDelegate.swift */,
 				D4EA5A9B21D135C5007D883C /* ViewController.swift */,
-				D4EA5A9D21D135C5007D883C /* Main.storyboard */,
+				D4EA5AAF21D13884007D883C /* NetworkManager.swift */,
+				D4EA5AB121D13928007D883C /* Post.swift */,
+				D4EA5AB321D14006007D883C /* PostTableViewCell.swift */,
+				D4EA5AAB21D136E4007D883C /* SignUpViewController.swift */,
 				D4EA5AA021D135CB007D883C /* Assets.xcassets */,
 				D4EA5AA221D135CB007D883C /* LaunchScreen.storyboard */,
+				D4EA5AAD21D13710007D883C /* PostsNavigationViewController.swift */,
 				D4EA5AA521D135CB007D883C /* Info.plist */,
 			);
 			path = ConfessionsDynamicApp;
+			sourceTree = "<group>";
+		};
+		E8A3B098E8D6A84F4B78019D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				887A229A6B5DBB6A236129BA /* Pods_ConfessionsDynamicApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4EA5AA821D135CB007D883C /* Build configuration list for PBXNativeTarget "ConfessionsDynamicApp" */;
 			buildPhases = (
+				6DAA4A2DDD3184E4C0AE6566 /* [CP] Check Pods Manifest.lock */,
 				D4EA5A9221D135C5007D883C /* Sources */,
 				D4EA5A9321D135C5007D883C /* Frameworks */,
 				D4EA5A9421D135C5007D883C /* Resources */,
+				84CC2263105DCD0CE7FA8BA4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,18 +162,71 @@
 			files = (
 				D4EA5AA421D135CB007D883C /* LaunchScreen.storyboard in Resources */,
 				D4EA5AA121D135CB007D883C /* Assets.xcassets in Resources */,
-				D4EA5A9F21D135C5007D883C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6DAA4A2DDD3184E4C0AE6566 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ConfessionsDynamicApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84CC2263105DCD0CE7FA8BA4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4EA5A9221D135C5007D883C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4EA5AB421D14006007D883C /* PostTableViewCell.swift in Sources */,
+				D4EA5AAC21D136E4007D883C /* SignUpViewController.swift in Sources */,
 				D4EA5A9C21D135C5007D883C /* ViewController.swift in Sources */,
+				D4EA5AB021D13884007D883C /* NetworkManager.swift in Sources */,
+				D4EA5AB221D13928007D883C /* Post.swift in Sources */,
+				D4EA5AAE21D13710007D883C /* PostsNavigationViewController.swift in Sources */,
 				D4EA5A9A21D135C5007D883C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +234,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D4EA5A9D21D135C5007D883C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D4EA5A9E21D135C5007D883C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D4EA5AA221D135CB007D883C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,6 +363,7 @@
 		};
 		D4EA5AA921D135CB007D883C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33097C385FEBDA6A31CCBF82 /* Pods-ConfessionsDynamicApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -297,6 +381,7 @@
 		};
 		D4EA5AAA21D135CB007D883C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 849ECA7A33D90DFF2878EB00 /* Pods-ConfessionsDynamicApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

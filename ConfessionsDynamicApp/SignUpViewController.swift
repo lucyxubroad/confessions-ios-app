@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SignInViewController.swift
 //  ConfessionsApp
 //
 //  Created by Lucy Xu on 12/23/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SignUpViewController: UIViewController {
     
     var cornellImageView: UIImageView!
     var cornellLogoImageView: UIImageView!
@@ -20,14 +20,15 @@ class ViewController: UIViewController {
     var passwordImageView: UIImageView!
     var passwordTextField: UITextField!
     
-    var googleSignInButton: UIButton!
-    var signInButton: UIButton!
+    var confirmPasswordImageView: UIImageView!
+    var confirmPasswordTextField: UITextField!
     
     var signUpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Do any additional setup after loading the view.
         
         view.backgroundColor = .white
         
@@ -72,33 +73,28 @@ class ViewController: UIViewController {
         passwordTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.addSubview(passwordTextField)
         
-        googleSignInButton = UIButton()
-        googleSignInButton.translatesAutoresizingMaskIntoConstraints = false
-        googleSignInButton.setTitle("Sign In with Google", for: .normal)
-        googleSignInButton.layer.cornerRadius = 5
-        googleSignInButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
-        googleSignInButton.setTitleColor(.white, for: .normal)
-        view.addSubview(googleSignInButton)
+        confirmPasswordImageView = UIImageView()
+        confirmPasswordImageView.translatesAutoresizingMaskIntoConstraints = false
+        confirmPasswordImageView.image = UIImage(named: "lock")
+        view.addSubview(confirmPasswordImageView)
         
-        signInButton = UIButton()
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.setTitle("Sign In", for: .normal)
-        signInButton.layer.cornerRadius = 5
-        signInButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
-        signInButton.setTitleColor(.white, for: .normal)
-        signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
-        view.addSubview(signInButton)
+        confirmPasswordTextField = UITextField()
+        confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        confirmPasswordTextField.placeholder = "Confirm Password"
+        confirmPasswordTextField.textColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1)
+        confirmPasswordTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        view.addSubview(confirmPasswordTextField)
         
         signUpButton = UIButton()
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitle("Don't have an account? Sign up!", for: .normal)
-        signUpButton.setTitleColor(.black, for: .normal)
-        signUpButton.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
+        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.layer.cornerRadius = 5
+        signUpButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+        signUpButton.setTitleColor(.white, for: .normal)
         view.addSubview(signUpButton)
-
-        setUpConstraints()
         
+        setUpConstraints()
     }
     
     func setUpConstraints() {
@@ -152,35 +148,29 @@ class ViewController: UIViewController {
             ])
         
         NSLayoutConstraint.activate([
-            googleSignInButton.topAnchor.constraint(equalTo: passwordImageView.bottomAnchor, constant: 50),
-            googleSignInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
-            googleSignInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
-            googleSignInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            googleSignInButton.heightAnchor.constraint(equalToConstant: 50)
+            confirmPasswordImageView.topAnchor.constraint(equalTo: passwordImageView.bottomAnchor, constant: 50),
+            confirmPasswordImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            confirmPasswordImageView.widthAnchor.constraint(equalToConstant: 20),
+            confirmPasswordImageView.heightAnchor.constraint(equalToConstant: 20)
             ])
         
         NSLayoutConstraint.activate([
-            signInButton.topAnchor.constraint(equalTo: googleSignInButton.bottomAnchor, constant: 20),
-            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
-            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
-            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signInButton.heightAnchor.constraint(equalToConstant: 50)
+            confirmPasswordTextField.bottomAnchor.constraint(equalTo: confirmPasswordImageView.bottomAnchor),
+            confirmPasswordTextField.leadingAnchor.constraint(equalTo: confirmPasswordImageView.trailingAnchor, constant: 10),
+            confirmPasswordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
             ])
         
         NSLayoutConstraint.activate([
-            signUpButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            signUpButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 50),
+            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
+            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
             signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
     
     @objc func signUp() {
-        let signUpViewController = SignUpViewController()
-        present(signUpViewController, animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @objc func signIn() {
-        let postsNavigationViewController = PostsNavigationViewController()
-        navigationController?.pushViewController(postsNavigationViewController, animated: true)
-    }
 }
-
