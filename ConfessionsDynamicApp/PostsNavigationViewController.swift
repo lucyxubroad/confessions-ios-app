@@ -45,6 +45,7 @@ class PostsNavigationViewController: UIViewController {
         postButton.setTitle("Post", for: .normal)
         postButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
         postButton.setTitleColor(.white, for: .normal)
+        postButton.addTarget(self, action: #selector(postButtonClicked), for: .touchUpInside)
         view.addSubview(postButton)
         
         postsTableView = UITableView()
@@ -93,6 +94,24 @@ class PostsNavigationViewController: UIViewController {
     func getPosts() {
         NetworkManager.getPosts { postsArray in
             self.posts = postsArray
+            self.posts.reverse()
+            DispatchQueue.main.async {
+                self.postsTableView.reloadData()
+            }
+        }
+    }
+    
+    @objc func postButtonClicked() {
+        print(postTextField.text ?? "manual text")
+        if let postText = postTextField.text {
+            createPost(text: postText)
+        }
+    }
+    
+    @objc func createPost(text: String) {
+        NetworkManager.createPost(text: text) { newPost in
+            self.posts.append(newPost)
+            self.posts.reverse()
             DispatchQueue.main.async {
                 self.postsTableView.reloadData()
             }

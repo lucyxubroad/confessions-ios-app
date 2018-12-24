@@ -31,4 +31,31 @@ class NetworkManager {
             }
         }
     }
+    
+    static func createPost(text: String, completion: @escaping (Post) -> Void) {
+        let parameters: [String: Any] = [
+            "text": text,
+            "username": "Anonymous #1231",
+            "longitude": -45.453449,
+            "latitude": -76.473503
+        ]
+        
+        Alamofire.request(postsEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    print(json)
+                }
+                let jsonDecoder = JSONDecoder()
+                if let postResponse = try? jsonDecoder.decode(PostedResponse.self, from: data) {
+                    completion(postResponse.data)
+                } else {
+                    print("Invalid Response Data")
+                }
+            case .failure(let error):
+                print("There was an error!")
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

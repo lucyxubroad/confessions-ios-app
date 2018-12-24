@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         emailTextField = UITextField()
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Email"
-        emailTextField.textColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1)
+        emailTextField.textColor = .black
         emailTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.addSubview(emailTextField)
         
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
-        passwordTextField.textColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1)
+        passwordTextField.textColor = .black
         passwordTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.addSubview(passwordTextField)
         
