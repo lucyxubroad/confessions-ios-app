@@ -50,7 +50,7 @@ class PostsNavigationViewController: UIViewController {
         
         postsTableView = UITableView()
         postsTableView.translatesAutoresizingMaskIntoConstraints = false
-        postsTableView.allowsSelection = false
+        postsTableView.allowsSelection = true
         postsTableView.delegate = self
         postsTableView.dataSource = self
         postsTableView.register(PostTableViewCell.self, forCellReuseIdentifier: postsReuseIdentifier)
@@ -123,9 +123,17 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: postsReuseIdentifier, for: indexPath) as! PostTableViewCell
-        print(posts[indexPath.row])
         cell.configure(for: posts[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked")
+        let post = posts[indexPath.row]
+        let postNavigationViewController = PostNavigationViewController()
+        postNavigationViewController.post = post
+        navigationController?.pushViewController(postNavigationViewController, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

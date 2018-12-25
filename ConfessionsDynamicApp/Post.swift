@@ -16,10 +16,6 @@ struct PostResponse: Codable {
     var data: [Post]
 }
 
-//struct PostsDataResponse: Codable {
-//    var posts: [Post]
-//}
-
 struct Post: Codable {
     var id: Int
     var score: Int
