@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PostTableViewCellDelegate: class {
+    func commentButtonClicked(cell: PostTableViewCell)
+    func likeButtonClicked(cell: PostTableViewCell)
+}
+
 class PostTableViewCell: UITableViewCell {
     
     var postTextLabel: UILabel!
@@ -29,6 +34,8 @@ class PostTableViewCell: UITableViewCell {
     
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
+    
+    weak var delegate: PostTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -169,10 +176,12 @@ class PostTableViewCell: UITableViewCell {
     
     @objc func likeButtonClicked() {
         print("likeButtonClicked")
+        delegate?.likeButtonClicked(cell: self)
     }
     
     @objc func commentButtonClicked() {
         print("commentButtonClicked")
+        delegate?.commentButtonClicked(cell: self)
     }
     
     func configure(for post: Post) {
@@ -195,3 +204,4 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

@@ -27,9 +27,9 @@ class NetworkManager {
         Alamofire.request(postsEndpoint, method: .get).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                    print(json)
-                }
+//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+//                    print(json)
+//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(PostResponse.self, from: data) {
                     completion(postResponse.data)
@@ -53,9 +53,9 @@ class NetworkManager {
         Alamofire.request(postsEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                    print(json)
-                }
+//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+//                    print(json)
+//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(PostedResponse.self, from: data) {
                     completion(postResponse.data)
@@ -100,9 +100,9 @@ class NetworkManager {
         Alamofire.request(commentsEndpoint, method: .get).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                    print(json)
-                }
+//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+//                    print(json)
+//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(Comment1Response.self, from: data) {
                     completion(postResponse.data)

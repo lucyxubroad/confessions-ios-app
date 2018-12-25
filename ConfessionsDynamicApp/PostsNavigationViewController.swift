@@ -121,10 +121,11 @@ class PostsNavigationViewController: UIViewController {
     }
 }
 
-extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSource {
+extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSource, PostTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: postsReuseIdentifier, for: indexPath) as! PostTableViewCell
+        cell.delegate = self
         cell.configure(for: posts[indexPath.row])
         return cell
     }
@@ -150,5 +151,29 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 100
+    }
+    
+    func commentButtonClicked(cell: PostTableViewCell) {
+        let indexPath = self.postsTableView.indexPath(for: cell)
+        if let postIndexPath = indexPath {
+            let post = posts[postIndexPath.row]
+            let postNavigationViewController = PostNavigationViewController()
+            postNavigationViewController.post = post
+            navigationController?.pushViewController(postNavigationViewController, animated: true)
+        }
+    }
+    
+    func likeButtonClicked(cell: PostTableViewCell) {
+        let indexPath = self.postsTableView.indexPath(for: cell)
+        print("delegate stuff \(indexPath!.row)")
+        if let postIndexPath = indexPath {
+            let post = posts[postIndexPath.row]
+            NetworkManager.likePost(postId: post.id) { newPost in
+                DispatchQueue.main.async {
+                    self.getPosts()
+                    self.postsTableView.reloadData()
+                }
+            }
+        }
     }
 }
