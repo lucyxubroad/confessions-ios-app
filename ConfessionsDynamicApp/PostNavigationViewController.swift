@@ -18,6 +18,11 @@ class PostNavigationViewController: UIViewController {
     var commentTextField: UITextField!
     var commentPostButton: UIButton!
     
+    var grayHeartImageView: UIImageView!
+    var likeCountLabel: UILabel!
+    var grayCommentImageView: UIImageView!
+    var commentCountLabel: UILabel!
+    
     var commentsTableView: UITableView!
     let commentsReuseIdentifier = "CommentTableViewCellReuse"
     
@@ -63,6 +68,34 @@ class PostNavigationViewController: UIViewController {
         postTextLabel.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(postTextLabel)
         
+        grayHeartImageView = UIImageView()
+        grayHeartImageView.translatesAutoresizingMaskIntoConstraints = false
+        if (post.score > 0) {
+            grayHeartImageView.image = UIImage(named: "heart-pink")
+        } else {
+            grayHeartImageView.image = UIImage(named: "heart-gray")
+        }
+        
+        likeCountLabel = UILabel()
+        likeCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        likeCountLabel.textColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1)
+        likeCountLabel.text = "\(post.score)"
+        likeCountLabel.font = UIFont.systemFont(ofSize: 12)
+        
+        grayCommentImageView = UIImageView()
+        if (post.comment_count > 0) {
+            grayCommentImageView.image = UIImage(named: "comment-pink")
+        } else {
+            grayCommentImageView.image = UIImage(named: "comment-gray")
+        }
+        grayCommentImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        commentCountLabel = UILabel()
+        commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        commentCountLabel.text = "\(post.comment_count)"
+        commentCountLabel.textColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1)
+        commentCountLabel.font = UIFont.systemFont(ofSize: 12)
+        
         commentsTableView = UITableView()
         commentsTableView.translatesAutoresizingMaskIntoConstraints = false
         commentsTableView.allowsSelection = false
@@ -72,6 +105,7 @@ class PostNavigationViewController: UIViewController {
         commentsTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
         commentsTableView.rowHeight = UITableView.automaticDimension
         commentsTableView.estimatedRowHeight = 100.0
+        commentsTableView.separatorStyle = .none
         view.addSubview(commentsTableView)
         
         commentBoxView = UIView()
@@ -94,6 +128,11 @@ class PostNavigationViewController: UIViewController {
         commentPostButton.setTitleColor(UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1), for: .normal)
         commentPostButton.addTarget(self, action: #selector(commentPostButtonClicked), for: .touchUpInside)
         view.addSubview(commentPostButton)
+        
+        view.addSubview(grayHeartImageView)
+        view.addSubview(likeCountLabel)
+        view.addSubview(grayCommentImageView)
+        view.addSubview(commentCountLabel)
         
         setUpConstraints()
         getComments()
@@ -120,7 +159,31 @@ class PostNavigationViewController: UIViewController {
             ])
         
         NSLayoutConstraint.activate([
-            commentsTableView.topAnchor.constraint(equalTo: userImageView.bottomAnchor, constant: 80),
+            grayHeartImageView.leadingAnchor.constraint(equalTo: userImageView.leadingAnchor),
+            grayHeartImageView.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor, constant: padding*3),
+            grayHeartImageView.widthAnchor.constraint(equalToConstant: 15),
+            grayHeartImageView.heightAnchor.constraint(equalToConstant: 15)
+            ])
+        
+        NSLayoutConstraint.activate([
+            likeCountLabel.centerYAnchor.constraint(equalTo: grayHeartImageView.centerYAnchor),
+            likeCountLabel.leadingAnchor.constraint(equalTo: grayHeartImageView.trailingAnchor, constant: padding),
+            ])
+        
+        NSLayoutConstraint.activate([
+            grayCommentImageView.leadingAnchor.constraint(equalTo: likeCountLabel.trailingAnchor, constant: padding*2),
+            grayCommentImageView.topAnchor.constraint(equalTo: grayHeartImageView.topAnchor),
+            grayCommentImageView.widthAnchor.constraint(equalToConstant: 15),
+            grayCommentImageView.heightAnchor.constraint(equalToConstant: 15)
+            ])
+        
+        NSLayoutConstraint.activate([
+            commentCountLabel.centerYAnchor.constraint(equalTo: grayCommentImageView.centerYAnchor),
+            commentCountLabel.leadingAnchor.constraint(equalTo: grayCommentImageView.trailingAnchor, constant: padding)
+            ])
+        
+        NSLayoutConstraint.activate([
+            commentsTableView.topAnchor.constraint(equalTo: grayHeartImageView.bottomAnchor, constant: padding*3),
             commentsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             commentsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             commentsTableView.bottomAnchor.constraint(equalTo: commentBoxView.topAnchor)
@@ -150,7 +213,7 @@ class PostNavigationViewController: UIViewController {
     func getComments() {
         NetworkManager.getComments(postId: post.id) { commentsArray in
             self.comments = commentsArray
-            self.comments.reverse()
+//            self.comments.reverse()
             DispatchQueue.main.async {
                 self.commentsTableView.reloadData()
             }
@@ -174,7 +237,6 @@ class PostNavigationViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension PostNavigationViewController: UITableViewDelegate, UITableViewDataSource {

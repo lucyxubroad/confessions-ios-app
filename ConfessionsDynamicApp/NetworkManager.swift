@@ -18,6 +18,10 @@ class NetworkManager {
     private static let commentsPostEndpointKeyword = "/comment/"
     private static let commentsEndpointOutline = "http://35.231.241.252/api/post/{id}/comments/"
     
+    private static let likeEndpointBase = commentsEndpointBase
+    private static let likeEndpointKeyword = "/vote/"
+    private static let likeEndpointOutline = "http://35.231.241.252/api/post/{id}/vote/"
+    
     
     static func getPosts(completion: @escaping ([Post]) -> Void) {
         Alamofire.request(postsEndpoint, method: .get).validate().responseData { (response) in
@@ -47,6 +51,31 @@ class NetworkManager {
         ]
         
         Alamofire.request(postsEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    print(json)
+                }
+                let jsonDecoder = JSONDecoder()
+                if let postResponse = try? jsonDecoder.decode(PostedResponse.self, from: data) {
+                    completion(postResponse.data)
+                } else {
+                    print("Invalid Response Data")
+                }
+            case .failure(let error):
+                print("There was an error!")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func likePost(postId: Int, completion: @escaping (Post) -> Void) {
+        let likeEndpoint = "\(likeEndpointBase)\(postId)\(likeEndpointKeyword)"
+        print("likeEndpoint: \(likeEndpoint)")
+        let parameters: [String: Any] = [
+            "vote": true
+        ]
+        Alamofire.request(likeEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {

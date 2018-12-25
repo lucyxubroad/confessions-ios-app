@@ -94,7 +94,7 @@ class CommentTableViewCell: UITableViewCell {
             contentView.topAnchor.constraint(equalTo: userImageView.topAnchor, constant: -padding*2),
             contentView.leadingAnchor.constraint(equalTo: userImageView.leadingAnchor, constant: -45),
             contentView.trailingAnchor.constraint(equalTo: commentBoxView.trailingAnchor, constant: 45),
-            contentView.bottomAnchor.constraint(equalTo: commentBoxView.bottomAnchor, constant: padding*2)
+            contentView.bottomAnchor.constraint(equalTo: commentBoxView.bottomAnchor, constant: padding)
             ])
         
         super.updateConstraints()

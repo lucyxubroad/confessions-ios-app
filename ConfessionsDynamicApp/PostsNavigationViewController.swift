@@ -54,6 +54,8 @@ class PostsNavigationViewController: UIViewController {
         postsTableView.delegate = self
         postsTableView.dataSource = self
         postsTableView.register(PostTableViewCell.self, forCellReuseIdentifier: postsReuseIdentifier)
+        postsTableView.estimatedRowHeight = 100.0
+        postsTableView.separatorStyle = .none
         postsTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
         view.addSubview(postsTableView)
         
@@ -140,7 +142,13 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
         return posts.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+    func tableView(_ tableView: UITableView,heightForRowAt indexPath:IndexPath) -> CGFloat
+    {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 100
     }
 }
