@@ -37,8 +37,12 @@ class PostTableViewCell: UITableViewCell {
     
     weak var delegate: PostTableViewCellDelegate?
     
+    let randomNumber = Int.random(in: 1 ..< 6)
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        print("randomnumber is \(randomNumber)")
         
         postTextLabel = UILabel()
         postTextLabel.frame = CGRect(x: 0, y: 0, width: 400, height: 300)
@@ -50,7 +54,7 @@ class PostTableViewCell: UITableViewCell {
         
         userImageView = UIImageView()
         userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.image = UIImage(named: "profile-men")
+        userImageView.image = UIImage(named: "\(randomNumber)")
         userImageView.layer.cornerRadius = 20
         userImageView.layer.masksToBounds = true
         
@@ -180,7 +184,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func commentButtonClicked() {
-        print("commentButtonClicked")
+//        print("commentButtonClicked")
         delegate?.commentButtonClicked(cell: self)
     }
     

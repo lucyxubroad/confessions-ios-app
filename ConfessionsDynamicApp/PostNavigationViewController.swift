@@ -23,6 +23,8 @@ class PostNavigationViewController: UIViewController {
     var grayCommentImageView: UIImageView!
     var commentCountLabel: UILabel!
     
+    var largeGrayHeartImageView: UIImageView!
+    
     var commentsTableView: UITableView!
     let commentsReuseIdentifier = "CommentTableViewCellReuse"
     
@@ -30,6 +32,8 @@ class PostNavigationViewController: UIViewController {
     let padding: CGFloat = 8
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
+    
+    var randomNumber: Int!
     
     var comments = [Comment1]()
 
@@ -46,7 +50,7 @@ class PostNavigationViewController: UIViewController {
         
         userImageView = UIImageView()
         userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.image = UIImage(named: "profile-men")
+        userImageView.image = UIImage(named: "\(randomNumber ?? 3)")
         userImageView.layer.cornerRadius = 20
         userImageView.layer.masksToBounds = true
         view.addSubview(userImageView)
@@ -89,6 +93,15 @@ class PostNavigationViewController: UIViewController {
             grayCommentImageView.image = UIImage(named: "comment-gray")
         }
         grayCommentImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        largeGrayHeartImageView = UIImageView()
+        largeGrayHeartImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        if liked {
+//            largeGrayHeartImageView.image = UIImage(named: "comment-pink")
+//        } else {
+//            largeGrayHeartImageView.image = UIImage(named: "comment-pink")
+//        }
         
         commentCountLabel = UILabel()
         commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -221,16 +234,14 @@ class PostNavigationViewController: UIViewController {
     }
     
     @objc func commentPostButtonClicked() {
-        print("commentPostButtonClicked")
+//        print("commentPostButtonClicked")
         if let commentText = commentTextField.text {
             createComment(postId: post.id, text: commentText)
         }
     }
     
     func createComment(postId: Int, text: String) {
-        NetworkManager.createComment(postId: postId, text: text) { newComment in
-//            self.comments.append(newComment)
-//            self.comments.reverse()
+        NetworkManager.createComment(postId: postId, text: text) { returnedPost in
             DispatchQueue.main.async {
                 self.getComments()
                 self.commentsTableView.reloadData()

@@ -22,14 +22,15 @@ class NetworkManager {
     private static let likeEndpointKeyword = "/vote/"
     private static let likeEndpointOutline = "http://35.231.241.252/api/post/{id}/vote/"
     
+    private static let registerUserEndpoint = "http://35.231.241.252/register/"
+    
+    private static let loginUserEndpoint = "http://35.231.241.252/login/"
+    
     
     static func getPosts(completion: @escaping ([Post]) -> Void) {
         Alamofire.request(postsEndpoint, method: .get).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-//                    print(json)
-//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(PostResponse.self, from: data) {
                     completion(postResponse.data)
@@ -53,9 +54,6 @@ class NetworkManager {
         Alamofire.request(postsEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-//                    print(json)
-//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(PostedResponse.self, from: data) {
                     completion(postResponse.data)
@@ -71,7 +69,7 @@ class NetworkManager {
     
     static func likePost(postId: Int, completion: @escaping (Post) -> Void) {
         let likeEndpoint = "\(likeEndpointBase)\(postId)\(likeEndpointKeyword)"
-        print("likeEndpoint: \(likeEndpoint)")
+//        print("likeEndpoint: \(likeEndpoint)")
         let parameters: [String: Any] = [
             "vote": true
         ]
@@ -96,13 +94,10 @@ class NetworkManager {
     
     static func getComments(postId: Int, completion: @escaping ([Comment1]) -> Void) {
         let commentsEndpoint = "\(commentsEndpointBase)\(postId)\(commentsGetEndpointKeyword)"
-        print("commentsEndpoint: \(commentsEndpoint)")
+//        print("commentsEndpoint: \(commentsEndpoint)")
         Alamofire.request(commentsEndpoint, method: .get).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
-//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-//                    print(json)
-//                }
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(Comment1Response.self, from: data) {
                     completion(postResponse.data)
@@ -131,6 +126,56 @@ class NetworkManager {
                 let jsonDecoder = JSONDecoder()
                 if let postResponse = try? jsonDecoder.decode(Comment1edResponse.self, from: data) {
                     completion(postResponse.data)
+                } else {
+                    print("Invalid Response Data")
+                }
+            case .failure(let error):
+                print("There was an error!")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func registerUser(email: String, password: String, completion: @escaping (RegisterUserResponse) -> Void) {
+        let parameters: [String: Any] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire.request(registerUserEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    print(json)
+                }
+                let jsonDecoder = JSONDecoder()
+                if let postResponse = try? jsonDecoder.decode(RegisterUserResponse.self, from: data) {
+                    completion(postResponse)
+                } else {
+                    print("Invalid Response Data")
+                }
+            case .failure(let error):
+                print("There was an error!")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func loginUser(email: String, password: String, completion: @escaping (RegisterUserResponse) -> Void) {
+        let parameters: [String: Any] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire.request(loginUserEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:]).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    print(json)
+                }
+                let jsonDecoder = JSONDecoder()
+                if let postResponse = try? jsonDecoder.decode(RegisterUserResponse.self, from: data) {
+                    completion(postResponse)
                 } else {
                     print("Invalid Response Data")
                 }

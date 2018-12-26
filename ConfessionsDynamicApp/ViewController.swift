@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
         passwordTextField.textColor = .black
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.addSubview(passwordTextField)
         
@@ -179,8 +180,18 @@ class ViewController: UIViewController {
     }
     
     @objc func signIn() {
-        let postsNavigationViewController = PostsNavigationViewController()
-        navigationController?.pushViewController(postsNavigationViewController, animated: true)
+        if let email = emailTextField?.text, let password = passwordTextField?.text {
+            print("email is \(email)")
+            print("password is \(password)")
+            NetworkManager.loginUser(email: email, password: password) { registeredUser in
+                DispatchQueue.main.async {
+//                    print("registered user is \(registeredUser)")
+                    let postsNavigationViewController = PostsNavigationViewController()
+                    postsNavigationViewController.user = User(user_id: registeredUser.user_id, photo_id: registeredUser.photo_id)
+                    self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
+                }
+            }
+        }
     }
 }
 

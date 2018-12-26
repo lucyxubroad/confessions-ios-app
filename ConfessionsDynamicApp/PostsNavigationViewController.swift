@@ -18,6 +18,7 @@ class PostsNavigationViewController: UIViewController {
     var postsTableView: UITableView!
     let postsReuseIdentifier = "PostTableViewCellReuse"
     
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class PostsNavigationViewController: UIViewController {
         
         userImageView = UIImageView()
         userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.image = UIImage(named: "profile-men")
+        userImageView.image = UIImage(named: "\(user.photo_id)")
         userImageView.layer.cornerRadius = 20
         userImageView.layer.masksToBounds = true
         view.addSubview(userImageView)
@@ -112,9 +113,8 @@ class PostsNavigationViewController: UIViewController {
     
     @objc func createPost(text: String) {
         NetworkManager.createPost(text: text) { newPost in
-            self.posts.append(newPost)
-            self.posts.reverse()
             DispatchQueue.main.async {
+                self.posts.insert(newPost, at: 0)
                 self.postsTableView.reloadData()
             }
         }
@@ -135,6 +135,7 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
         let post = posts[indexPath.row]
         let postNavigationViewController = PostNavigationViewController()
         postNavigationViewController.post = post
+        postNavigationViewController.randomNumber = user.photo_id
         navigationController?.pushViewController(postNavigationViewController, animated: true)
         
     }
@@ -159,6 +160,7 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
             let post = posts[postIndexPath.row]
             let postNavigationViewController = PostNavigationViewController()
             postNavigationViewController.post = post
+            postNavigationViewController.randomNumber = user.photo_id
             navigationController?.pushViewController(postNavigationViewController, animated: true)
         }
     }

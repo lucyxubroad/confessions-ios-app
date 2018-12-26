@@ -20,6 +20,8 @@ class CommentTableViewCell: UITableViewCell {
     let padding: CGFloat = 8
     let labelHeight: CGFloat = 32
     
+    let randomNumber = Int.random(in: 1 ..< 6)
+    
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
     
@@ -43,7 +45,7 @@ class CommentTableViewCell: UITableViewCell {
         
         userImageView = UIImageView()
         userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.image = UIImage(named: "profile-men")
+        userImageView.image = UIImage(named: "\(randomNumber)")
         userImageView.layer.cornerRadius = 20
         userImageView.layer.masksToBounds = true
         

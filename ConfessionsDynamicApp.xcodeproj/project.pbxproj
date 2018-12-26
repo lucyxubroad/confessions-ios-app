@@ -20,6 +20,7 @@
 		D4EA5AB621D163B7007D883C /* PostNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB521D163B6007D883C /* PostNavigationViewController.swift */; };
 		D4EA5AB821D1692E007D883C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB721D1692E007D883C /* Comment.swift */; };
 		D4EA5ABA21D16B06007D883C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB921D16B06007D883C /* CommentTableViewCell.swift */; };
+		D4EA5ABC21D3168F007D883C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5ABB21D3168F007D883C /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D4EA5AB521D163B6007D883C /* PostNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNavigationViewController.swift; sourceTree = "<group>"; };
 		D4EA5AB721D1692E007D883C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		D4EA5AB921D16B06007D883C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		D4EA5ABB21D3168F007D883C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				D4EA5AB721D1692E007D883C /* Comment.swift */,
 				D4EA5AB321D14006007D883C /* PostTableViewCell.swift */,
 				D4EA5AB921D16B06007D883C /* CommentTableViewCell.swift */,
+				D4EA5ABB21D3168F007D883C /* User.swift */,
 				D4EA5AB521D163B6007D883C /* PostNavigationViewController.swift */,
 				D4EA5AAD21D13710007D883C /* PostsNavigationViewController.swift */,
 				D4EA5AAB21D136E4007D883C /* SignUpViewController.swift */,
@@ -240,6 +243,7 @@
 				D4EA5ABA21D16B06007D883C /* CommentTableViewCell.swift in Sources */,
 				D4EA5AB821D1692E007D883C /* Comment.swift in Sources */,
 				D4EA5A9A21D135C5007D883C /* AppDelegate.swift in Sources */,
+				D4EA5ABC21D3168F007D883C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

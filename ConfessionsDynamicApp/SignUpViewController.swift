@@ -170,7 +170,16 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func signUp() {
-        dismiss(animated: true, completion: nil)
+        if let email = emailTextField?.text, let password = passwordTextField?.text {
+            print("email is \(email)")
+            print("password is \(password)")
+            NetworkManager.registerUser(email: email, password: password) { registeredUser in
+                DispatchQueue.main.async {
+                    print("registered?")
+                }
+            }
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
