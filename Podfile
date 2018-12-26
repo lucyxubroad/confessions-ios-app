@@ -5,5 +5,6 @@ target ‘ConfessionsDynamicApp’ do
   use_frameworks!
   # Pods for SampleProject
   pod 'Alamofire'
-  pod ‘SnapKit'
+  pod 'SnapKit'
+  pod 'GoogleSignIn'
 end

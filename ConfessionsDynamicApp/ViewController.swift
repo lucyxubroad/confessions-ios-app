@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GoogleSignIn
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GIDSignInUIDelegate {
     
     var cornellImageView: UIImageView!
     var cornellLogoImageView: UIImageView!
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     var passwordTextField: UITextField!
     
     var googleSignInButton: UIButton!
+    var googleOauthSignInButton: GIDSignInButton!
     var signInButton: UIButton!
     
     var signUpButton: UIButton!
@@ -28,6 +30,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signInSilently()
         
         view.backgroundColor = .white
         
@@ -73,13 +78,13 @@ class ViewController: UIViewController {
         passwordTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.addSubview(passwordTextField)
         
-        googleSignInButton = UIButton()
-        googleSignInButton.translatesAutoresizingMaskIntoConstraints = false
-        googleSignInButton.setTitle("Sign In with Google", for: .normal)
-        googleSignInButton.layer.cornerRadius = 5
-        googleSignInButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
-        googleSignInButton.setTitleColor(.white, for: .normal)
-        view.addSubview(googleSignInButton)
+        googleOauthSignInButton = GIDSignInButton()
+        googleOauthSignInButton.translatesAutoresizingMaskIntoConstraints = false
+//        googleOauthSignInButton.setTitle("Sign In with Google", for: .normal)
+        googleOauthSignInButton.layer.cornerRadius = 5
+//        googleOauthSignInButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
+//        googleOauthSignInButton.setTitleColor(.white, for: .normal)
+        view.addSubview(googleOauthSignInButton)
         
         signInButton = UIButton()
         signInButton.translatesAutoresizingMaskIntoConstraints = false
@@ -153,15 +158,15 @@ class ViewController: UIViewController {
             ])
         
         NSLayoutConstraint.activate([
-            googleSignInButton.topAnchor.constraint(equalTo: passwordImageView.bottomAnchor, constant: 50),
-            googleSignInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
-            googleSignInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
-            googleSignInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            googleSignInButton.heightAnchor.constraint(equalToConstant: 50)
+            googleOauthSignInButton.topAnchor.constraint(equalTo: passwordImageView.bottomAnchor, constant: 50),
+            googleOauthSignInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
+            googleOauthSignInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
+            googleOauthSignInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            googleOauthSignInButton.heightAnchor.constraint(equalToConstant: 50)
             ])
         
         NSLayoutConstraint.activate([
-            signInButton.topAnchor.constraint(equalTo: googleSignInButton.bottomAnchor, constant: 20),
+            signInButton.topAnchor.constraint(equalTo: googleOauthSignInButton.bottomAnchor, constant: 20),
             signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
             signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
             signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

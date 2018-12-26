@@ -21,6 +21,7 @@
 		D4EA5AB821D1692E007D883C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB721D1692E007D883C /* Comment.swift */; };
 		D4EA5ABA21D16B06007D883C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5AB921D16B06007D883C /* CommentTableViewCell.swift */; };
 		D4EA5ABC21D3168F007D883C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA5ABB21D3168F007D883C /* User.swift */; };
+		D4EA5ABE21D405F8007D883C /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4EA5ABD21D405F8007D883C /* credentials.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		D4EA5AB721D1692E007D883C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		D4EA5AB921D16B06007D883C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		D4EA5ABB21D3168F007D883C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D4EA5ABD21D405F8007D883C /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				D4EA5AAB21D136E4007D883C /* SignUpViewController.swift */,
 				D4EA5AA021D135CB007D883C /* Assets.xcassets */,
 				D4EA5AA221D135CB007D883C /* LaunchScreen.storyboard */,
+				D4EA5ABD21D405F8007D883C /* credentials.plist */,
 				D4EA5AA521D135CB007D883C /* Info.plist */,
 			);
 			path = ConfessionsDynamicApp;
@@ -124,6 +127,7 @@
 				D4EA5A9321D135C5007D883C /* Frameworks */,
 				D4EA5A9421D135C5007D883C /* Resources */,
 				84CC2263105DCD0CE7FA8BA4 /* [CP] Embed Pods Frameworks */,
+				35804239F1126CC1C4CB2B0A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4EA5AA421D135CB007D883C /* LaunchScreen.storyboard in Resources */,
+				D4EA5ABE21D405F8007D883C /* credentials.plist in Resources */,
 				D4EA5AA121D135CB007D883C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +185,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		35804239F1126CC1C4CB2B0A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6DAA4A2DDD3184E4C0AE6566 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -212,6 +239,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ConfessionsDynamicApp/Pods-ConfessionsDynamicApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -219,6 +248,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
