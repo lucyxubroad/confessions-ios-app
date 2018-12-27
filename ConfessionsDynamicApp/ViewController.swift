@@ -34,7 +34,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = "890717240425-nfijso6f1m99d25iucti5rusbflokslh.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signInSilently()
+//        GIDSignIn.sharedInstance().signInSilently()
         
         view.backgroundColor = .white
         
@@ -188,11 +188,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     @objc func signIn() {
         if let email = emailTextField?.text, let password = passwordTextField?.text {
-            print("email is \(email)")
-            print("password is \(password)")
             NetworkManager.loginUser(email: email, password: password) { registeredUser in
                 DispatchQueue.main.async {
-//                    print("registered user is \(registeredUser)")
                     let postsNavigationViewController = PostsNavigationViewController()
                     postsNavigationViewController.user = User(user_id: registeredUser.user_id, photo_id: registeredUser.photo_id)
                     self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
