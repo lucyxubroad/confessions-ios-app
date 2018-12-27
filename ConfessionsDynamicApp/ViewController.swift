@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class ViewController: UIViewController, GIDSignInUIDelegate {
+class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var cornellImageView: UIImageView!
     var cornellLogoImageView: UIImageView!
@@ -31,6 +31,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        GIDSignIn.sharedInstance().clientID = "890717240425-nfijso6f1m99d25iucti5rusbflokslh.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signInSilently()
         
@@ -197,6 +199,36 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
                 }
             }
         }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        if let error = error {
+            print("\(error.localizedDescription)")
+        } else {
+            /*
+             
+             //Perform any operations on signed in user here.
+            let userId = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            print("Successful sign in! \n userId: \(userId), idToken: \(idToken), fullName: \(fullName), givenName: \(givenName), familyName: \(familyName), email: \(email)")
+             
+             */
+            let postsNavigationViewController = PostsNavigationViewController()
+            postsNavigationViewController.user = User(user_id: 1, photo_id: 1)
+            self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
+            
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
+              withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
 }
 
