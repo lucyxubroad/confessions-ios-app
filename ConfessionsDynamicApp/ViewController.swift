@@ -27,6 +27,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var signUpButton: UIButton!
     
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
+    var loadingView: UIView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -82,10 +85,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         
         googleOauthSignInButton = GIDSignInButton()
         googleOauthSignInButton.translatesAutoresizingMaskIntoConstraints = false
-//        googleOauthSignInButton.setTitle("Sign In with Google", for: .normal)
         googleOauthSignInButton.layer.cornerRadius = 5
-//        googleOauthSignInButton.backgroundColor = UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1)
-//        googleOauthSignInButton.setTitleColor(.white, for: .normal)
         view.addSubview(googleOauthSignInButton)
         
         signInButton = UIButton()
@@ -188,10 +188,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     @objc func signIn() {
         if let email = emailTextField?.text, let password = passwordTextField?.text {
+            self.showActivityIndicator()
             NetworkManager.loginUser(email: email, password: password) { registeredUser in
                 DispatchQueue.main.async {
                     let postsNavigationViewController = PostsNavigationViewController()
                     postsNavigationViewController.user = User(user_id: registeredUser.user_id, photo_id: registeredUser.photo_id)
+                    self.hideActivityIndicator()
                     self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
                 }
             }
@@ -200,12 +202,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
+        showActivityIndicator()
         if let error = error {
             print("\(error.localizedDescription)")
         } else {
             /*
-             
-             //Perform any operations on signed in user here.
+            Perform any operations on signed in user here.
             let userId = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken // Safe to send to the server
             let fullName = user.profile.name
@@ -213,12 +215,42 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             let familyName = user.profile.familyName
             let email = user.profile.email
             print("Successful sign in! \n userId: \(userId), idToken: \(idToken), fullName: \(fullName), givenName: \(givenName), familyName: \(familyName), email: \(email)")
-             
              */
-            let postsNavigationViewController = PostsNavigationViewController()
-            postsNavigationViewController.user = User(user_id: 1, photo_id: 1)
-            self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
+            let deadlineTime = DispatchTime.now() + 0.3 //Here is 0.3 second as per your requirement
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                let postsNavigationViewController = PostsNavigationViewController()
+                postsNavigationViewController.user = User(user_id: 1, photo_id: 1)
+                self.hideActivityIndicator()
+                self.navigationController?.pushViewController(postsNavigationViewController, animated: true)
+            }
             
+        }
+    }
+    
+    func showActivityIndicator() {
+        DispatchQueue.main.async {
+            self.loadingView = UIView()
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.center = self.view.center
+            self.loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            self.loadingView.alpha = 0.7
+            self.loadingView.clipsToBounds = true
+            self.loadingView.layer.cornerRadius = 10
+            
+            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+            
+            self.loadingView.addSubview(self.spinner)
+            self.view.addSubview(self.loadingView)
+            self.spinner.startAnimating()
+        }
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.loadingView.removeFromSuperview()
         }
     }
     
