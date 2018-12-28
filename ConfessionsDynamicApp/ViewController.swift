@@ -27,7 +27,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var signUpButton: UIButton!
     
+    var width = UIScreen.main.bounds.width
+    var height = UIScreen.main.bounds.height
+    
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
+    var signInLabel = UILabel()
     var loadingView: UIView = UIView()
     
     override func viewDidLoad() {
@@ -216,7 +220,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             let email = user.profile.email
             print("Successful sign in! \n userId: \(userId), idToken: \(idToken), fullName: \(fullName), givenName: \(givenName), familyName: \(familyName), email: \(email)")
              */
-            let deadlineTime = DispatchTime.now() + 0.3 //Here is 0.3 second as per your requirement
+            let deadlineTime = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
                 let postsNavigationViewController = PostsNavigationViewController()
                 postsNavigationViewController.user = User(user_id: 1, photo_id: 1)
@@ -230,18 +234,26 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     func showActivityIndicator() {
         DispatchQueue.main.async {
             self.loadingView = UIView()
-            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: self.width, height: self.height)
             self.loadingView.center = self.view.center
-            self.loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            self.loadingView.alpha = 0.7
-            self.loadingView.clipsToBounds = true
-            self.loadingView.layer.cornerRadius = 10
+            self.loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+            self.loadingView.alpha = 0.75
+//            self.loadingView.clipsToBounds = true
+//            self.loadingView.layer.cornerRadius = 10
             
             self.spinner = UIActivityIndicatorView(style: .whiteLarge)
             self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
             self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
             
+            self.signInLabel.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 40.0)
+            self.signInLabel.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2 + 40)
+            self.signInLabel.textAlignment = .center
+            self.signInLabel.text = "Signing In"
+            self.signInLabel.textColor = .white
+            self.signInLabel.font = UIFont.systemFont(ofSize: 14)
+            
             self.loadingView.addSubview(self.spinner)
+            self.loadingView.addSubview(self.signInLabel)
             self.view.addSubview(self.loadingView)
             self.spinner.startAnimating()
         }

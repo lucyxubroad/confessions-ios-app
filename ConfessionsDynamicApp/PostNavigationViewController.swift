@@ -11,6 +11,8 @@ import UIKit
 class PostNavigationViewController: UIViewController {
     
     var post: Post!
+    
+    var backArrowImageView: UIImageView!
     var userImageView: UIImageView!
     var postTextLabel: UILabel!
     var userNameLabel: UILabel!
@@ -47,6 +49,14 @@ class PostNavigationViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = .white
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backArrowTapped))
+        backArrowImageView.addGestureRecognizer(tap)
+        backArrowImageView.isUserInteractionEnabled = true
+        backArrowImageView = UIImageView()
+        backArrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        backArrowImageView.image = UIImage(named: "back")
+        view.addSubview(backArrowImageView)
         
         userImageView = UIImageView()
         userImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -152,9 +162,17 @@ class PostNavigationViewController: UIViewController {
     }
     
     func setUpConstraints() {
+        
+        NSLayoutConstraint.activate([
+            backArrowImageView.centerYAnchor.constraint(equalTo: userImageView.centerYAnchor),
+            backArrowImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            backArrowImageView.widthAnchor.constraint(equalToConstant: 25),
+            backArrowImageView.heightAnchor.constraint(equalToConstant: 25)
+            ])
+        
         NSLayoutConstraint.activate([
             userImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            userImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            userImageView.leadingAnchor.constraint(equalTo: backArrowImageView.trailingAnchor, constant: 15),
             userImageView.widthAnchor.constraint(equalToConstant: 40),
             userImageView.heightAnchor.constraint(equalToConstant: 40)
             ])
@@ -235,6 +253,13 @@ class PostNavigationViewController: UIViewController {
     
     @objc func commentPostButtonClicked() {
 //        print("commentPostButtonClicked")
+        if let commentText = commentTextField.text {
+            createComment(postId: post.id, text: commentText)
+        }
+    }
+    
+    @objc func backArrowTapped() {
+        //        print("commentPostButtonClicked")
         if let commentText = commentTextField.text {
             createComment(postId: post.id, text: commentText)
         }
