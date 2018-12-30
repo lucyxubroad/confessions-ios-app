@@ -14,6 +14,24 @@ First Project Attempt:
  * Cornell Confessions Server v1: https://github.com/lucyxubroad/confessions-ios-backend
  * Cornell Confessions Design v1: https://scene.zeplin.io/project/5bf42f9111d4fc12b2436a81
  
+ # Installation
+ 
+ I used [CocoaPods](https://cocoapods.org "CocoaPods") for my dependency manager. This should be installed before 
+ continuing.
+ 
+ Clone the project with
+ ```
+ git clone https://github.com/lucyxubroad/confessions-ios-app.git
+ ```
+ 
+ After cloning the project, cd into the new directory and install dependencies with
+ ```
+ pod install
+ ```
+
+ Open the Confessions Xcode workspace, ConfessionsDynamicApp.xcworkspace.
+ 
+ 
  
 
 
