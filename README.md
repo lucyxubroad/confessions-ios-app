@@ -31,6 +31,12 @@ First Project Attempt:
 
  Open the Confessions Xcode workspace, ConfessionsDynamicApp.xcworkspace.
  
+ # Demo (screenshots)
+ <img src="/Demos/launch-screen.png" width="250">
+ <img src="/Demos/sign-in-filled.png" width="250">
+ <img src="/Demos/feed.png" width="250">
+ <img src="/Demos/comments.png" width="250">
+ 
  
  
 
