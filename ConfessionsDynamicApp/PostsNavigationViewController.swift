@@ -74,7 +74,7 @@ class PostsNavigationViewController: UIViewController {
         
         navigationTabBarView = UIView()
         navigationTabBarView.translatesAutoresizingMaskIntoConstraints = false
-        navigationTabBarView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
+        navigationTabBarView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
         view.addSubview(navigationTabBarView)
         
         feedNavigationButton = UIButton()
@@ -86,7 +86,7 @@ class PostsNavigationViewController: UIViewController {
         signOutNavigationButton = UIButton()
         signOutNavigationButton.translatesAutoresizingMaskIntoConstraints = false
         signOutNavigationButton.setImage(UIImage(named: "signout"), for: .normal)
-        signOutNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        signOutNavigationButton.addTarget(self, action: #selector(signOutButtonClicked), for: .touchUpInside)
         navigationTabBarView.addSubview(signOutNavigationButton)
         
         userNavigationButton = UIButton()
@@ -142,21 +142,21 @@ class PostsNavigationViewController: UIViewController {
         NSLayoutConstraint.activate([
             feedNavigationButton.heightAnchor.constraint(equalToConstant: 25),
             feedNavigationButton.widthAnchor.constraint(equalToConstant: 25),
-            feedNavigationButton.leadingAnchor.constraint(equalTo: navigationTabBarView.leadingAnchor, constant: width/10),
+            feedNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.leadingAnchor, constant: width/8),
             feedNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
             ])
         
         NSLayoutConstraint.activate([
             settingsNavigationButton.heightAnchor.constraint(equalToConstant: 25),
             settingsNavigationButton.widthAnchor.constraint(equalToConstant: 25),
-            settingsNavigationButton.leadingAnchor.constraint(equalTo: feedNavigationButton.trailingAnchor, constant: width/10),
+            settingsNavigationButton.centerXAnchor.constraint(equalTo: feedNavigationButton.centerXAnchor, constant: 3*width/16),
             settingsNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
             ])
         
         NSLayoutConstraint.activate([
             userNavigationButton.heightAnchor.constraint(equalToConstant: 25),
             userNavigationButton.widthAnchor.constraint(equalToConstant: 25),
-            userNavigationButton.leadingAnchor.constraint(equalTo: writePostNavigationButton.trailingAnchor, constant: width/10),
+            userNavigationButton.centerXAnchor.constraint(equalTo: writePostNavigationButton.centerXAnchor, constant: 3*width/16),
             userNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
             ])
         
@@ -171,7 +171,7 @@ class PostsNavigationViewController: UIViewController {
             signOutNavigationButton.heightAnchor.constraint(equalToConstant: 25),
             signOutNavigationButton.widthAnchor.constraint(equalToConstant: 25),
             signOutNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor),
-            signOutNavigationButton.leadingAnchor.constraint(equalTo: userNavigationButton.trailingAnchor, constant: width/10)
+            signOutNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.trailingAnchor, constant: -width/8)
             ])
         
         NSLayoutConstraint.activate([
@@ -202,6 +202,10 @@ class PostsNavigationViewController: UIViewController {
     
     @objc func feedNavigationButtonClicked() {
         print("Feed navigation clicked")
+    }
+    
+    @objc func signOutButtonClicked() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func createPost(text: String) {

@@ -36,6 +36,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().clientID = "890717240425-nfijso6f1m99d25iucti5rusbflokslh.apps.googleusercontent.com"

@@ -30,6 +30,14 @@ class PostNavigationViewController: UIViewController {
     var commentsTableView: UITableView!
     let commentsReuseIdentifier = "CommentTableViewCellReuse"
     
+    var feedNavigationButton: UIButton!
+    var signOutNavigationButton: UIButton!
+    var userNavigationButton: UIButton!
+    var writePostNavigationButton: UIButton!
+    var settingsNavigationButton: UIButton!
+    
+    var navigationTabBarView: UIView!
+    
     let username: String = "Anonymous #1231"
     let padding: CGFloat = 8
     var width = UIScreen.main.bounds.width
@@ -151,11 +159,45 @@ class PostNavigationViewController: UIViewController {
         commentPostButton.setTitleColor(UIColor(red: 241/255, green: 53/255, blue: 100/255, alpha: 1), for: .normal)
         commentPostButton.addTarget(self, action: #selector(commentPostButtonClicked), for: .touchUpInside)
         view.addSubview(commentPostButton)
-        
         view.addSubview(grayHeartImageView)
         view.addSubview(likeCountLabel)
         view.addSubview(grayCommentImageView)
         view.addSubview(commentCountLabel)
+        
+        navigationTabBarView = UIView()
+        navigationTabBarView.translatesAutoresizingMaskIntoConstraints = false
+        navigationTabBarView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        view.addSubview(navigationTabBarView)
+        
+        feedNavigationButton = UIButton()
+        feedNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        feedNavigationButton.setImage(UIImage(named: "feed"), for: .normal)
+        feedNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(feedNavigationButton)
+        
+        signOutNavigationButton = UIButton()
+        signOutNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        signOutNavigationButton.setImage(UIImage(named: "signout"), for: .normal)
+        signOutNavigationButton.addTarget(self, action: #selector(signOutButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(signOutNavigationButton)
+        
+        userNavigationButton = UIButton()
+        userNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        userNavigationButton.setImage(UIImage(named: "user"), for: .normal)
+        userNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(userNavigationButton)
+        
+        writePostNavigationButton = UIButton()
+        writePostNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        writePostNavigationButton.setImage(UIImage(named: "addpost"), for: .normal)
+        writePostNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(writePostNavigationButton)
+        
+        settingsNavigationButton = UIButton()
+        settingsNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsNavigationButton.setImage(UIImage(named: "settings"), for: .normal)
+        settingsNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(settingsNavigationButton)
         
         setUpConstraints()
         getComments()
@@ -223,7 +265,7 @@ class PostNavigationViewController: UIViewController {
         NSLayoutConstraint.activate([
             commentBoxView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             commentBoxView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            commentBoxView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            commentBoxView.bottomAnchor.constraint(equalTo: navigationTabBarView.topAnchor),
             commentBoxView.heightAnchor.constraint(equalToConstant: 75)
             ])
         
@@ -237,6 +279,48 @@ class PostNavigationViewController: UIViewController {
         NSLayoutConstraint.activate([
             commentPostButton.centerYAnchor.constraint(equalTo: commentTextField.centerYAnchor),
             commentPostButton.leadingAnchor.constraint(equalTo: commentTextField.trailingAnchor, constant: padding*2),
+            ])
+        
+        NSLayoutConstraint.activate([
+            feedNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            feedNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            feedNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.leadingAnchor, constant: width/8),
+            feedNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            settingsNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            settingsNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            settingsNavigationButton.centerXAnchor.constraint(equalTo: feedNavigationButton.centerXAnchor, constant: 3*width/16),
+            settingsNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            userNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            userNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            userNavigationButton.centerXAnchor.constraint(equalTo: writePostNavigationButton.centerXAnchor, constant: 3*width/16),
+            userNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            writePostNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            writePostNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            writePostNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor),
+            writePostNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.centerXAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            signOutNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            signOutNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            signOutNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor),
+            signOutNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.trailingAnchor, constant: -width/8)
+            ])
+        
+        NSLayoutConstraint.activate([
+            navigationTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationTabBarView.heightAnchor.constraint(equalToConstant: 50),
+            navigationTabBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
     }
     
@@ -260,6 +344,14 @@ class PostNavigationViewController: UIViewController {
     
     @objc func backArrowTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func feedNavigationButtonClicked() {
+        print("Feed navigation clicked")
+    }
+    
+    @objc func signOutButtonClicked() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func createComment(postId: Int, text: String) {
