@@ -42,7 +42,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        print("randomnumber is \(randomNumber)")
+        self.selectionStyle = .none
         
         postTextLabel = UILabel()
         postTextLabel.frame = CGRect(x: 0, y: 0, width: 400, height: 300)

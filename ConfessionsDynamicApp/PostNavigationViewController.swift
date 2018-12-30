@@ -49,11 +49,11 @@ class PostNavigationViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = .white
-        
+    
+        backArrowImageView = UIImageView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(backArrowTapped))
         backArrowImageView.addGestureRecognizer(tap)
         backArrowImageView.isUserInteractionEnabled = true
-        backArrowImageView = UIImageView()
         backArrowImageView.translatesAutoresizingMaskIntoConstraints = false
         backArrowImageView.image = UIImage(named: "back")
         view.addSubview(backArrowImageView)
@@ -259,10 +259,7 @@ class PostNavigationViewController: UIViewController {
     }
     
     @objc func backArrowTapped() {
-        //        print("commentPostButtonClicked")
-        if let commentText = commentTextField.text {
-            createComment(postId: post.id, text: commentText)
-        }
+        navigationController?.popViewController(animated: true)
     }
     
     func createComment(postId: Int, text: String) {

@@ -14,6 +14,17 @@ class PostsNavigationViewController: UIViewController {
     var postTextField: UITextField!
     var postButton: UIButton!
     
+    var feedNavigationButton: UIButton!
+    var signOutNavigationButton: UIButton!
+    var userNavigationButton: UIButton!
+    var writePostNavigationButton: UIButton!
+    var settingsNavigationButton: UIButton!
+    
+    var navigationTabBarView: UIView!
+    
+    var width = UIScreen.main.bounds.width
+    var height = UIScreen.main.bounds.height
+    
     var posts = [Post]()
     var postsTableView: UITableView!
     let postsReuseIdentifier = "PostTableViewCellReuse"
@@ -61,6 +72,41 @@ class PostsNavigationViewController: UIViewController {
         postsTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
         view.addSubview(postsTableView)
         
+        navigationTabBarView = UIView()
+        navigationTabBarView.translatesAutoresizingMaskIntoConstraints = false
+        navigationTabBarView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
+        view.addSubview(navigationTabBarView)
+        
+        feedNavigationButton = UIButton()
+        feedNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        feedNavigationButton.setImage(UIImage(named: "feed"), for: .normal)
+        feedNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(feedNavigationButton)
+        
+        signOutNavigationButton = UIButton()
+        signOutNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        signOutNavigationButton.setImage(UIImage(named: "signout"), for: .normal)
+        signOutNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(signOutNavigationButton)
+        
+        userNavigationButton = UIButton()
+        userNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        userNavigationButton.setImage(UIImage(named: "user"), for: .normal)
+        userNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(userNavigationButton)
+        
+        writePostNavigationButton = UIButton()
+        writePostNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        writePostNavigationButton.setImage(UIImage(named: "addpost"), for: .normal)
+        writePostNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(writePostNavigationButton)
+        
+        settingsNavigationButton = UIButton()
+        settingsNavigationButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsNavigationButton.setImage(UIImage(named: "settings"), for: .normal)
+        settingsNavigationButton.addTarget(self, action: #selector(feedNavigationButtonClicked), for: .touchUpInside)
+        navigationTabBarView.addSubview(settingsNavigationButton)
+        
         setUpConstraints()
         getPosts()
     }
@@ -90,7 +136,49 @@ class PostsNavigationViewController: UIViewController {
             postsTableView.topAnchor.constraint(equalTo: postButton.bottomAnchor),
             postsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             postsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            postsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            postsTableView.bottomAnchor.constraint(equalTo: navigationTabBarView.topAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            feedNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            feedNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            feedNavigationButton.leadingAnchor.constraint(equalTo: navigationTabBarView.leadingAnchor, constant: width/10),
+            feedNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            settingsNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            settingsNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            settingsNavigationButton.leadingAnchor.constraint(equalTo: feedNavigationButton.trailingAnchor, constant: width/10),
+            settingsNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            userNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            userNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            userNavigationButton.leadingAnchor.constraint(equalTo: writePostNavigationButton.trailingAnchor, constant: width/10),
+            userNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            writePostNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            writePostNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            writePostNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor),
+            writePostNavigationButton.centerXAnchor.constraint(equalTo: navigationTabBarView.centerXAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            signOutNavigationButton.heightAnchor.constraint(equalToConstant: 25),
+            signOutNavigationButton.widthAnchor.constraint(equalToConstant: 25),
+            signOutNavigationButton.centerYAnchor.constraint(equalTo: navigationTabBarView.centerYAnchor),
+            signOutNavigationButton.leadingAnchor.constraint(equalTo: userNavigationButton.trailingAnchor, constant: width/10)
+            ])
+        
+        NSLayoutConstraint.activate([
+            navigationTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationTabBarView.heightAnchor.constraint(equalToConstant: 50),
+            navigationTabBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
     }
     
@@ -110,6 +198,10 @@ class PostsNavigationViewController: UIViewController {
         if let postText = postTextField.text {
             createPost(text: postText)
         }
+    }
+    
+    @objc func feedNavigationButtonClicked() {
+        print("Feed navigation clicked")
     }
     
     @objc func createPost(text: String) {
@@ -132,7 +224,6 @@ extension PostsNavigationViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked")
         let post = posts[indexPath.row]
         let postNavigationViewController = PostNavigationViewController()
         postNavigationViewController.post = post

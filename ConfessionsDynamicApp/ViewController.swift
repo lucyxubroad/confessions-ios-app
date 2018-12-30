@@ -238,8 +238,6 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             self.loadingView.center = self.view.center
             self.loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
             self.loadingView.alpha = 0.75
-//            self.loadingView.clipsToBounds = true
-//            self.loadingView.layer.cornerRadius = 10
             
             self.spinner = UIActivityIndicatorView(style: .whiteLarge)
             self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
